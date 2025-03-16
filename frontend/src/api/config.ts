@@ -1,1 +1,1 @@
-export const API_BASE_URL = "http://34.135.16.113:5000";
+export const API_BASE_URL = "https://cloud-ai-dashboard-511097205399.us-central1.run.app";
