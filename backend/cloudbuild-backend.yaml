@@ -19,8 +19,6 @@ steps:
      - '--region'
      - 'us-central1'
      - '--allow-unauthenticated'
-     - '--set-env-vars'
-     - 'PORT=5000'
 
 images:
 - 'gcr.io/$PROJECT_ID/cloud-ai-dashboard-backend'
