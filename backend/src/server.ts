@@ -44,7 +44,7 @@ export const sendServerUpdates = (data: any) => {
 };
 
 // ✅ Start Server
-const PORT = 3000;
+const PORT = 8080;
 console.log(`Starting server on PORT: ${PORT}`); // Debugging log
 server.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
