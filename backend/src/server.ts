@@ -12,7 +12,7 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server, { cors: { origin: "*" } });
+const io = new Server(server, { cors: { origin: "*",methods: ["GET", "POST"] } });
 
 app.use(cors());
 app.use(express.json());
@@ -37,15 +37,10 @@ io.on("connection", (socket) => {
   });
 });
 
-// ✅ Function to Emit Server Updates
-export const sendServerUpdates = (data: any) => {
-  console.log("Emitting updateServers event:", data); // ✅ Debug log
-  io.emit("updateServers", data);
-};
+
 
 // ✅ Start Server
-const PORT = 8080;
-console.log(`Starting server on PORT: ${PORT}`); // Debugging log
-server.listen(PORT, "0.0.0.0", () => {
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
