@@ -1,7 +1,27 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID', '.']
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/cloud-ai-dashboard-frontend', '.']
+  
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/$PROJECT_ID']
+  args: ['push', 'gcr.io/$PROJECT_ID/cloud-ai-dashboard-frontend']
+
+# Deploy the Docker image to Cloud Run 
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args:
+     - 'gcloud'
+     - 'run'
+     - 'deploy'
+     - 'cloud-ai-dashboard-frontend'
+     - '--image'
+     - 'gcr.io/$PROJECT_ID/cloud-ai-dashboard-frontend'
+     - '--platform'
+     - 'managed'
+     - '--region'
+     - 'us-central1'
+     - '--allow-unauthenticated'
+
 images:
-- 'gcr.io/$PROJECT_ID'
+- 'gcr.io/$PROJECT_ID/cloud-ai-dashboard-frontend'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
