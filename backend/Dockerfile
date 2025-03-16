@@ -1,20 +1,18 @@
 FROM node:latest
 
-# Create a directory for the app
+# Set working directory
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json to the container
+# Copy package.json and install dependencies
 COPY package*.json ./
+RUN npm install --omit=dev
 
-# Install dependencies
-RUN npm install
-
-# Copy all other source code to the container
+# Copy the rest of the application
 COPY . .
 
-# Expose port 3000 (the port on which your Express app runs)
+# Set the port dynamically from Cloud Run
+ENV PORT=5000
 EXPOSE 5000
 
-# Command to run the application
-# RUN npm run dev
-CMD ["npm", "run","dev"]
+# Run the application
+CMD ["node", "server.js"]
