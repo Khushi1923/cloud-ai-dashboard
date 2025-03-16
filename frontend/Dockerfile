@@ -12,9 +12,9 @@ RUN npm run build
 
 FROM node:latest
 
-WORKDIR /
+WORKDIR /app
 
-COPY --from=build-stage /dist ./dist
+COPY --from=build-stage /app/dist ./dist
 
 RUN npm install -g serve
 
