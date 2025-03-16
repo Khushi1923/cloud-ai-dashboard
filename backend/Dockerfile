@@ -13,10 +13,10 @@ RUN npm install
 COPY . .
 
 # Set environment variable for Cloud Run
-ENV PORT=3000
+ENV PORT=8080
 
 # Expose port 3000 to match Cloud Run
-EXPOSE 3000
+EXPOSE 8080
 
 # Start the application (use npm start for production)
 CMD ["npm", "start"]
