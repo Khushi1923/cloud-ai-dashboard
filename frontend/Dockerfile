@@ -1,6 +1,6 @@
 FROM node:latest AS build-stage
 
-WORKDIR /
+WORKDIR /app
 
 COPY package*.json ./
 
