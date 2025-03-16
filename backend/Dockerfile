@@ -1,18 +1,27 @@
+# Use an official Node.js runtime as a base image
 FROM node:latest
 
-# Set working directory
+# Set the working directory in the container
 WORKDIR /usr/src/app
 
-# Copy package.json and install dependencies
+# Copy package.json and package-lock.json first to take advantage of Docker layer caching
 COPY package*.json ./
-RUN npm install --omit=dev
 
-# Copy the rest of the application
+# Install dependencies
+RUN npm install
+
+# Copy the entire project
 COPY . .
 
-# Set the port dynamically from Cloud Run
+# Build TypeScript code
+RUN npm run build
+
+# Set environment variable for port
 ENV PORT=5000
+
+# Expose the port
 EXPOSE 5000
 
-# Run the application
-CMD ["node", "server.js"]
+# Start the server using the compiled JavaScript file
+CMD ["npm", "run", "start"]
+
