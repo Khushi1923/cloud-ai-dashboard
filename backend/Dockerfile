@@ -1,23 +1,23 @@
 # Use Node.js as base image
-FROM node:latest
+FROM node:18
 
-# Set working directory
+# Set the working directory inside the container
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json first (to leverage Docker cache)
+# Copy package.json and package-lock.json separately (to optimize Docker caching)
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the entire project
+# Copy the entire source code (including TypeScript files)
 COPY . .
 
-# Build TypeScript
+# Build TypeScript project 
 RUN npm run build
 
-# Expose port 5000
+# Expose the correct port
 EXPOSE 5000
 
-# Start the application
+# Run the compiled JavaScript server
 CMD ["node", "dist/server.js"]
