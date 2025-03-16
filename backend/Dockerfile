@@ -15,7 +15,11 @@ COPY . .
 # Set environment variable for Cloud Run
 ENV PORT=3000
 
+# Expose port 3000 to match Cloud Run
+EXPOSE 3000
+
 # Start the application (use npm start for production)
 CMD ["npm", "start"]
+
 
 
