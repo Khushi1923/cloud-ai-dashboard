@@ -12,9 +12,10 @@ RUN npm install
 # Copy all other source code to the container
 COPY . .
 
-# Expose port 3000 (the port on which your Express app runs)
-EXPOSE 3000
+# Set environment variable for Cloud Run
+ENV PORT=3000
 
-# Command to run the application
-# RUN npm run dev
-CMD ["npm", "run","dev"]
+# Start the application (use npm start for production)
+CMD ["npm", "start"]
+
+
